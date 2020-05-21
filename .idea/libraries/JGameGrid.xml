@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="JGameGrid">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../P2_Whist_v1.0/Whist/whist/dist/lib/JGameGrid.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../P2_Whist/out/production/P2_Whist/dist/lib/JGameGrid.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
