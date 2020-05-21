@@ -1,7 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce61a0f4-1093-4852-9ccb-37ebb8a23ada" name="Default Changelist" comment="" />
+    <list default="true" id="ce61a0f4-1093-4852-9ccb-37ebb8a23ada" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/BrokeRuleException.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/Whist$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/Whist$Rank.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/Whist$Suit.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/Whist.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigclub.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigclub1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigdiamond.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigdiamond1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigheart.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigheart1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigspade.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/bigspade1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs10.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs11.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs12.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs6.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs7.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs8.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs9.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs_item_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/clubs_item_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/cover.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds10.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds11.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds12.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds6.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds7.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds8.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds9.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds_item_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/diamonds_item_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/done30_0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/done30_1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/done30_2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/gameover.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/heart.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts10.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts11.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts12.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts6.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts7.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts8.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts9.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts_item_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/hearts_item_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/joker1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/joker2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/reshuffle.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades0.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades10.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades11.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades12.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades2.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades3.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades4.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades5.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades6.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades7.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades8.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades9.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades_item_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/spades_item_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/P2_Whist_v1.0(2)/sprites/text_item.png" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,8 +103,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Whist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="51">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -28,6 +113,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="592" />
@@ -113,12 +205,20 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1590060293284</updated>
-      <workItem from="1590060301890" duration="571000" />
+      <workItem from="1590060301890" duration="1321000" />
     </task>
+    <task id="LOCAL-00001" summary="Initial version of proj2">
+      <created>1590061026753</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590061026753</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="571000" />
+    <option name="totallyTimeSpent" value="1321000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="474" y="0" width="1073" height="830" extended-state="0" />
@@ -129,7 +229,7 @@
       <window_info id="Capture Tool" />
       <window_info id="UI Designer" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24926108" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24926108" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
@@ -139,7 +239,7 @@
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32234958" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32234958" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -159,11 +259,15 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial version of proj2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial version of proj2" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Whist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="51">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
         </state>
       </provider>
     </entry>
