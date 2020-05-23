@@ -1,5 +1,6 @@
 package player;
 
+import game.QuantityAnomalyException;
 import properties.Configure;
 
 import java.util.ArrayList;
@@ -12,6 +13,15 @@ public class PlayerFactory {
             case 1:
                 int interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
                 int randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
+                if (interactivePlayerNum + randomPlayerNum != 4){
+                    try {
+                        throw(new QuantityAnomalyException());
+                    } catch (QuantityAnomalyException e) {
+                        e.printStackTrace();
+                        System.out.println("The total number of people playing the game should be four");
+                        System.exit(0);
+                    }
+                }
                 int index = 0;
                 while(interactivePlayerNum >0){
                     players.add(new InteractivePlayer(index, false));
@@ -28,6 +38,15 @@ public class PlayerFactory {
             case 2:
                 int legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
                 int index2 = 0;
+                if (legalPlayerNum != 4){
+                    try {
+                        throw(new QuantityAnomalyException());
+                    } catch (QuantityAnomalyException e) {
+                        e.printStackTrace();
+                        System.out.println("The total number of people playing the game should be four");
+                        System.exit(0);
+                    }
+                }
                 while (legalPlayerNum>0){
                     players.add(new LegalPlayer(index2, true));
                     index2++;

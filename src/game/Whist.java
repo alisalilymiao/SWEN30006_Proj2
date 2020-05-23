@@ -110,7 +110,7 @@ public class Whist extends CardGame
 
     private Card selected;
 
-    private void initPlayers(int gameType){
+    private void initPlayers(int gameType) throws QuantityAnomalyException {
         PlayerFactory playerFactory = new PlayerFactory();
         players = playerFactory.initPlayer(gameType).toArray(new Player[0]);
     }
@@ -121,7 +121,7 @@ public class Whist extends CardGame
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players[i].setHand(hands[i]);
         }
-/*        // Set up human player for interaction
+/*      // Set up human player for interaction
         CardListener cardListener = new CardAdapter()  // Human Player plays card
         {
             public void leftDoubleClicked(Card card) {
@@ -239,7 +239,7 @@ public class Whist extends CardGame
         return Optional.empty();
     }
 
-    public Whist() throws IOException {
+    public Whist() throws IOException, QuantityAnomalyException {
         super(700, 700, 30);
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
@@ -266,7 +266,7 @@ public class Whist extends CardGame
         refresh();
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, QuantityAnomalyException {
         // System.out.println("Working Directory = " + System.getProperty("user.dir"));
         new Whist();
     }
