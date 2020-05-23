@@ -19,7 +19,7 @@ public class RandomPlayer implements Player{
     }
 
     @Override
-    public Card selectCard(Hand trick) {
+    public Card selectCard(Hand trick, Whist.Suit trumps) {
         selected = Whist.randomCard(hand);
         //hand.remove(selected,false);
         return selected;

@@ -4,6 +4,7 @@ import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.CardAdapter;
 import ch.aplu.jcardgame.CardListener;
 import ch.aplu.jcardgame.Hand;
+import game.Whist;
 
 import static ch.aplu.jgamegrid.GameGrid.delay;
 
@@ -27,7 +28,7 @@ public class InteractivePlayer implements Player{
     }
 
     @Override
-    public Card selectCard(Hand trick) {
+    public Card selectCard(Hand trick, Whist.Suit trumps) {
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);
         //hand.remove(selected,false);

@@ -29,7 +29,8 @@ public class Whist extends CardGame
     //随机生成的seed
     //static final Random random = ThreadLocalRandom.current();
     //使用固定seed生成的random
-    static final Random random = new Random(30006);
+    static final Random random = new Random();
+
 
     // return random Enum value
     public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
@@ -57,6 +58,9 @@ public class Whist extends CardGame
     public final int nbPlayers = 4;
     public final int nbStartCards = 13;
     public final int winningScore = 11;
+    //尝试初始化所有的player
+    private Player[] players = new Player[4];
+
     private final int handWidth = 400;
     private final int trickWidth = 40;
     private final Deck deck = new Deck(Suit.values(), Rank.values(), "cover");
@@ -85,9 +89,6 @@ public class Whist extends CardGame
 
     private int[] scores = new int[nbPlayers];
 
-    //尝试初始化所有的player
-    private Player[] players = new Player[4];
-
     Font bigFont = new Font("Serif", Font.BOLD, 36);
 
     private void initScore() {
@@ -107,6 +108,7 @@ public class Whist extends CardGame
     private Card selected;
 
     private void initPlayers(){
+
         players[0] = new InteractivePlayer(0,false);
         players[1] = new RandomPlayer(1, false);
         players[2] = new RandomPlayer(2, false);
@@ -164,7 +166,7 @@ public class Whist extends CardGame
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
             }
-            selected = players[nextPlayer].selectCard(trick);
+            selected = players[nextPlayer].selectCard(trick, trumps);
 
             // Lead with selected card
             trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -189,7 +191,7 @@ public class Whist extends CardGame
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
                 }
-                selected = players[nextPlayer].selectCard(trick);
+                selected = players[nextPlayer].selectCard(trick, trumps);
 
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -242,6 +244,7 @@ public class Whist extends CardGame
         super(700, 700, 30);
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
+        setStatusText("Users select one of the ");
         initPlayers();
         initScore();
         Optional<Integer> winner;
