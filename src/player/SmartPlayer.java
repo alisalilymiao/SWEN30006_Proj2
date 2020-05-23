@@ -17,7 +17,7 @@ public class SmartPlayer implements Player {
 		// TODO Auto-generated method stub
 		Suit leadSuit;
 		if(trick.getNumberOfCards()==0) {
-			return Whist.randomCard(trick);
+			return Whist.randomCard(hand);
 		}else {
 			leadSuit= (Suit) trick.get(0).getSuit();
 			//if player has lead suit card （手里有满足要求的）
