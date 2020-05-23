@@ -90,6 +90,9 @@ public class SmartPlayer implements Player {
     		return null;
 		for(int i=0;i < Cards.size();i++) {
 			if (Cards.get(i).getValue() <= biggestCard.getValue()) {
+				if (i==0){
+					return Cards.get(i);
+				}
 				return Cards.get(i - 1);
 			}
 		}
