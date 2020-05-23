@@ -42,20 +42,20 @@ public class SmartPlayer implements Player {
 			else {
 //				if player has trump suit card
 				if(this.hand.getNumberOfCardsWithSuit(trumps)>0) {
-					ArrayList<Card> trumpsCard = this.hand.getCardsWithSuit(trumps);
+					ArrayList<Card> trumpCards = this.hand.getCardsWithSuit(trumps);
 //					someone plays trump suit card
 					if(trick.getNumberOfCardsWithSuit(trumps)>0) {
 						Card biggestTrumpCard = trick.getCardsWithSuit(trumps).get(0);
 //						select the suitable card
-						for(int i=0;i < trumpsCard.size();i++) {
-							if(trumpsCard.get(i).getValue()<=biggestTrumpCard.getValue()) {
-								return trumpsCard.get(i-1);
+						for(int i=0;i < trumpCards.size();i++) {
+							if(trumpCards.get(i).getValue()<=biggestTrumpCard.getValue()) {
+								return trumpCards.get(i-1);
 							}
 						}
 					}
 //					none plays trump suit card
 					else {
-						return trumpsCard.get(trumpsCard.size()-1);
+						return trumpCards.get(trumpCards.size()-1);
 					}
 					
 				}
@@ -85,6 +85,19 @@ public class SmartPlayer implements Player {
     public void isLeadOrNot(int firstDeal) {
         this.isLead = index == firstDeal;
     }
+
+    //选择一个比当前最大的面值 大一点的卡片
+    private Card selectMinBigTarget(Card biggestCard,ArrayList<Card> Cards){
+    	if (Cards.size()==0)
+    		return null;
+		for(int i=0;i < Cards.size();i++) {
+			if (Cards.get(i).getValue() <= biggestCard.getValue()) {
+				return Cards.get(i - 1);
+			}
+		}
+		return null;
+
+	}
 
 
 }
