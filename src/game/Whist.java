@@ -4,10 +4,13 @@ import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 import player.InteractivePlayer;
 import player.Player;
+import player.PlayerFactory;
 import player.RandomPlayer;
+import properties.Configure;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.*;
 
 public class Whist extends CardGame
@@ -56,10 +59,10 @@ public class Whist extends CardGame
 
     private final String version = "1.0";
     public final int nbPlayers = 4;
-    public final int nbStartCards = 13;
-    public final int winningScore = 11;
+    public final int nbStartCards;
+    public final int winningScore;
     //尝试初始化所有的player
-    private Player[] players = new Player[4];
+    private Player[] players;
 
     private final int handWidth = 400;
     private final int trickWidth = 40;
@@ -107,12 +110,9 @@ public class Whist extends CardGame
 
     private Card selected;
 
-    private void initPlayers(){
-
-        players[0] = new InteractivePlayer(0,false);
-        players[1] = new RandomPlayer(1, false);
-        players[2] = new RandomPlayer(2, false);
-        players[3] = new RandomPlayer(3, false);
+    private void initPlayers(int gameType){
+        PlayerFactory playerFactory = new PlayerFactory();
+        players = playerFactory.initPlayer(gameType).toArray(new Player[0]);
     }
 
     private void initRound() {
@@ -239,13 +239,22 @@ public class Whist extends CardGame
         return Optional.empty();
     }
 
-    public Whist()
-    {
+    public Whist() throws IOException {
         super(700, 700, 30);
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
-        setStatusText("Users select one of the ");
-        initPlayers();
+        setStatusText("Users select one of the game pattern: 1.original 2.legal 3.smart");
+        System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
+        Scanner scanner = new Scanner(System.in);
+        int gameType = scanner.nextInt();
+        Configure.setGameProperties(gameType);
+        int Seed = Integer.parseInt(Configure.values("Seed"));
+        int nbStartCards = Integer.parseInt(Configure.values("nbStartCards"));
+        int winningScore = Integer.parseInt(Configure.values("winningScore"));
+        this.nbStartCards = nbStartCards;
+        this.winningScore = winningScore;
+        random.setSeed(Seed);
+        initPlayers(gameType);
         initScore();
         Optional<Integer> winner;
         do {
@@ -257,8 +266,7 @@ public class Whist extends CardGame
         refresh();
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         // System.out.println("Working Directory = " + System.getProperty("user.dir"));
         new Whist();
     }

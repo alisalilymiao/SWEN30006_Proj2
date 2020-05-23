@@ -29,7 +29,9 @@ public class PlayerFactory {
                 int legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
                 int index2 = 0;
                 while (legalPlayerNum>0){
-
+                    players.add(new LegalPlayer(index2, true));
+                    index2++;
+                    legalPlayerNum--;
                 }
         }
         return players;
