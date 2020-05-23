@@ -1,0 +1,17 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+.gitignore
+.idea/
+JGameGrid.jar
+P2_Whist_try.iml
+SMD proj2.iml
+out/production/P2_Whist_try/.gitignore
+out/production/P2_Whist_try/sprites/
+src/.gitignore
