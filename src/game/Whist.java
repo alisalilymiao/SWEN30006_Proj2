@@ -106,10 +106,10 @@ public class Whist extends CardGame {
     private Card selected;
 
     private void initPlayers(){
-        players[0] = new InteractivePlayer();
-        players[1] = new RandomPlayer();
-        players[2] = new RandomPlayer();
-        players[3] = new RandomPlayer();
+        players[0] = new InteractivePlayer(0,false);
+        players[1] = new RandomPlayer(1, false);
+        players[2] = new RandomPlayer(2, false);
+        players[3] = new RandomPlayer(3, false);
     }
 
     private void initRound() {
@@ -139,6 +139,7 @@ public class Whist extends CardGame {
         }
     }
 
+
     private Optional<Integer> playRound(){  // Returns winner, if any
         // Select and display trump suit
         final Suit trumps = randomEnum(Suit.class);
@@ -162,7 +163,7 @@ public class Whist extends CardGame {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
             }
-            selected = players[nextPlayer].selectCard();
+            selected = players[nextPlayer].selectCard(trick);
 
             // Lead with selected card
             trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -187,7 +188,7 @@ public class Whist extends CardGame {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
                 }
-                selected = players[nextPlayer].selectCard();
+                selected = players[nextPlayer].selectCard(trick);
 
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));

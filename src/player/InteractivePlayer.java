@@ -12,17 +12,22 @@ public class InteractivePlayer implements Player{
     private Hand hand;
     private Card selected;
     private CardListener cardListener;
+    private int index;
+    private boolean isLead;
+    private boolean isEnforceRules;
 
-    public InteractivePlayer(){
+    //初始传进来告知player是第几个
+    public InteractivePlayer(int index, boolean enforceRules){
         cardListener = new CardAdapter()  // Human Player plays card
         {
             public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
         };
-
+        this.index = index;
+        this.isEnforceRules = enforceRules;
     }
 
     @Override
-    public Card selectCard() {
+    public Card selectCard(Hand trick) {
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);
         //hand.remove(selected,false);
@@ -39,5 +44,10 @@ public class InteractivePlayer implements Player{
     public void updateHand(Hand hand) {
         this.hand = hand;
         selected = null;
+    }
+
+    @Override
+    public void isLeadOrNot(int firstDeal) {
+        this.isLead = index == firstDeal;
     }
 }
