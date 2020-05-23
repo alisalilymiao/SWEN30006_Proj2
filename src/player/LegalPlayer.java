@@ -9,6 +9,7 @@ public class LegalPlayer implements Player
     private Hand hand;
     private Card selected;
 
+
     Whist.Suit leadSuit;  //Define the current lead suit
 
 

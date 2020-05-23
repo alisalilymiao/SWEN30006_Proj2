@@ -56,6 +56,8 @@ public class PlayerFactory {
                     index2++;
                     legalPlayerNum--;
                 }
+                break;
+
             case 3:
                 interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
                 randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
