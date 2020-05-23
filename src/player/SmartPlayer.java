@@ -20,8 +20,9 @@ public class SmartPlayer implements Player {
 			return Whist.randomCard(hand);
 		}else {
 			leadSuit= (Suit) trick.get(0).getSuit();
+			System.out.println(leadSuit);
 			//if player has lead suit card （手里有满足要求的）
-			if(hand.getNumberOfCardsWithRank(leadSuit)>0) {
+			if(hand.getNumberOfCardsWithSuit(leadSuit)>0) {
 				//手上的leadingSuit扑克牌的数量
 				ArrayList<Card> leadSuitList  = hand.getCardsWithSuit(leadSuit);
 				if(trick.getCardsWithSuit(trump).size()>0) {
