@@ -9,10 +9,14 @@ public class PlayerFactory {
 
     public ArrayList<Player> initPlayer(int pattern){
         ArrayList<Player> players = new ArrayList<>();
+        int interactivePlayerNum;
+        int randomPlayerNum;
+        int legalPlayerNum;
+        int smartPlayerNum;
         switch (pattern){
             case 1:
-                int interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
-                int randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
+                interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
+                randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
                 if (interactivePlayerNum + randomPlayerNum != 4){
                     try {
                         throw(new QuantityAnomalyException());
@@ -36,7 +40,7 @@ public class PlayerFactory {
                 break;
 
             case 2:
-                int legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
+                legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
                 int index2 = 0;
                 if (legalPlayerNum != 4){
                     try {
@@ -52,6 +56,39 @@ public class PlayerFactory {
                     index2++;
                     legalPlayerNum--;
                 }
+            case 3:
+                interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
+                randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
+                smartPlayerNum = Integer.parseInt(Configure.values("smartPlayerNum"));
+
+                if (interactivePlayerNum+randomPlayerNum+smartPlayerNum != 4){
+                    try {
+                        throw(new QuantityAnomalyException());
+                    } catch (QuantityAnomalyException e) {
+                        e.printStackTrace();
+                        System.out.println("The total number of people playing the game should be four");
+                        System.exit(0);
+                    }
+                }
+
+                int index3 = 0;
+                while (interactivePlayerNum>0){
+                    players.add(new InteractivePlayer(index3, false));
+                    index3++;
+                    interactivePlayerNum--;
+                }
+                while (smartPlayerNum > 0){
+                    players.add(new SmartPlayer(index3,true));
+                    smartPlayerNum--;
+                    index3++;
+                }
+                while (randomPlayerNum>0){
+                    players.add(new RandomPlayer(index3,false));
+                    index3++;
+                    randomPlayerNum--;
+                }
+                break;
+
         }
         return players;
     }
