@@ -10,7 +10,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.*;
 
-public class Whist extends CardGame {
+public class Whist extends CardGame
+{
 
     public enum Suit
     {
