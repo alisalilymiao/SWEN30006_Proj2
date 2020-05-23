@@ -6,20 +6,11 @@ import game.Whist;
 
 public class LegalPlayer implements Player
 {
-    private int index;
     private Hand hand;
     private Card selected;
-    private boolean isLead;
-    private boolean isEnforceRules;
 
     Whist.Suit leadSuit;  //Define the current lead suit
 
-    //Constructor
-    public LegalPlayer(int index, boolean enforceRules)
-    {
-        this.index = index;
-        this.isEnforceRules = enforceRules;
-    }
 
     @Override
     public Card selectCard(Hand trick,Whist.Suit trump)
@@ -54,9 +45,5 @@ public class LegalPlayer implements Player
         this.hand = hand;
     }
 
-    @Override
-    public void isLeadOrNot(int firstDeal)
-    {
-        this.isLead = index == firstDeal;
-    }
+
 }

@@ -28,12 +28,12 @@ public class PlayerFactory {
                 }
                 int index = 0;
                 while(interactivePlayerNum >0){
-                    players.add(new InteractivePlayer(index, false));
+                    players.add(new InteractivePlayer());
                     index++;
                     interactivePlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    players.add(new RandomPlayer(index,false));
+                    players.add(new RandomPlayer());
                     index++;
                     randomPlayerNum--;
                 }
@@ -52,7 +52,7 @@ public class PlayerFactory {
                     }
                 }
                 while (legalPlayerNum>0){
-                    players.add(new LegalPlayer(index2, true));
+                    players.add(new LegalPlayer());
                     index2++;
                     legalPlayerNum--;
                 }
@@ -73,17 +73,17 @@ public class PlayerFactory {
 
                 int index3 = 0;
                 while (interactivePlayerNum>0){
-                    players.add(new InteractivePlayer(index3, false));
+                    players.add(new InteractivePlayer());
                     index3++;
                     interactivePlayerNum--;
                 }
                 while (smartPlayerNum > 0){
-                    players.add(new SmartPlayer(index3,true));
+                    players.add(new SmartPlayer());
                     smartPlayerNum--;
                     index3++;
                 }
                 while (randomPlayerNum>0){
-                    players.add(new RandomPlayer(index3,false));
+                    players.add(new RandomPlayer());
                     index3++;
                     randomPlayerNum--;
                 }

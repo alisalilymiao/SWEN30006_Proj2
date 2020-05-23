@@ -251,6 +251,7 @@ public class Whist extends CardGame
         int Seed = Integer.parseInt(Configure.values("Seed"));
         int nbStartCards = Integer.parseInt(Configure.values("nbStartCards"));
         int winningScore = Integer.parseInt(Configure.values("winningScore"));
+        enforceRules = Boolean.parseBoolean(Configure.values("enforceRules"));
         this.nbStartCards = nbStartCards;
         this.winningScore = winningScore;
         random.setSeed(Seed);

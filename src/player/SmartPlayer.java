@@ -8,18 +8,9 @@ import game.Whist;
 import game.Whist.Suit;
 
 public class SmartPlayer implements Player {
-	
-	private int index;
+
     private Hand hand;
     private Card selected;
-    private boolean isLead;
-    private boolean isEnforceRules;
-    
-    public SmartPlayer(int index, boolean enforceRules){
-        this.index = index;
-        this.isEnforceRules = enforceRules;
-    }
-
 
 	@Override
 	public Card selectCard(Hand trick, Suit trump) {
@@ -92,10 +83,6 @@ public class SmartPlayer implements Player {
         this.hand = hand;
     }
 
-    @Override
-    public void isLeadOrNot(int firstDeal) {
-        this.isLead = index == firstDeal;
-    }
 
     //选择一个比当前最大的面值 大一点的卡片
     private Card selectMinBigTarget(Card biggestCard,ArrayList<Card> Cards){
