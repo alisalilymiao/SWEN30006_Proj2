@@ -160,8 +160,8 @@ public class Whist extends CardGame
             trick = new Hand(deck);
             selected = null;
 
-            if (0 == nextPlayer){
-                setStatus("Player 0 double-click on card to lead.");
+            if (0 == nextPlayer || players[nextPlayer] instanceof InteractivePlayer){
+                setStatus("Player "+nextPlayer+" double-click on card to lead.");
             } else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
@@ -185,8 +185,8 @@ public class Whist extends CardGame
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
 
-                if (0 == nextPlayer){
-                    setStatus("Player 0 double-click on card to lead.");
+                if (0 == nextPlayer || players[nextPlayer] instanceof InteractivePlayer){
+                    setStatus("Player "+nextPlayer+" double-click on card to choose the card.");
                 } else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
