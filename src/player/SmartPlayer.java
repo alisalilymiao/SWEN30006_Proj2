@@ -24,11 +24,11 @@ public class SmartPlayer implements Player {
 			if(hand.getNumberOfCardsWithSuit(leadSuit)>0) {
 				//手上的leadingSuit扑克牌的数量
 				ArrayList<Card> leadSuitList  = hand.getCardsWithSuit(leadSuit);
-				if(trick.getCardsWithSuit(trump).size()>0) {
+				if(trick.getCardsWithSuit(trump).size()>0 && trump != leadSuit) {
 					//从手里出一张最小的牌
 					return leadSuitList.get(leadSuitList.size()-1);
 				}else {
-					//目前trick里面最大牌面是lead的牌
+					//选一张比目前trick里面最大牌面是lead的牌要大的牌
 					Card currentBiggestCard = trick.getCardsWithSuit(leadSuit).get(0);
 					//从手里出一张比当前牌所有牌要大的最小的牌
 					Card target = selectMinBigTarget(currentBiggestCard, leadSuitList);
