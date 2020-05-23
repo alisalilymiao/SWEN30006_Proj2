@@ -28,7 +28,7 @@ public class InteractivePlayer implements Player{
     }
 
     @Override
-    public Card selectCard(Hand trick, Whist.Suit trumps) {
+    public Card selectCard(Hand trick, Whist.Suit trump) {
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);
         //hand.remove(selected,false);

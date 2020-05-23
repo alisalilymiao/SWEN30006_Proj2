@@ -22,7 +22,7 @@ public class LegalPlayer implements Player
     }
 
     @Override
-    public Card selectCard(Hand trick,Whist.Suit trumps)
+    public Card selectCard(Hand trick,Whist.Suit trump)
     {
         if (trick.getNumberOfCards() != 0)
         {

@@ -22,38 +22,50 @@ public class SmartPlayer implements Player {
 
 
 	@Override
-	public Card selectCard(Hand trick, Suit trumps) {
+	public Card selectCard(Hand trick, Suit trump) {
 		// TODO Auto-generated method stub
 		Suit leadSuit;
 		if(trick.getNumberOfCards()==0) {
 			return Whist.randomCard(trick);
 		}else {
 			leadSuit= (Suit) trick.get(0).getSuit();
-//			if player has lead suit card
-			if(this.hand.getNumberOfCardsWithRank(leadSuit)>0) {
-				ArrayList<Card> leadSuitList  = this.hand.getCardsWithSuit(leadSuit);
-				if(trick.getCardsWithSuit(trumps).size()>0) {
+			//if player has lead suit card （手里有满足要求的）
+			if(hand.getNumberOfCardsWithRank(leadSuit)>0) {
+				//手上的leadingSuit扑克牌的数量
+				ArrayList<Card> leadSuitList  = hand.getCardsWithSuit(leadSuit);
+				if(trick.getCardsWithSuit(trump).size()>0) {
+					//从手里出一张最小的牌
 					return leadSuitList.get(leadSuitList.size()-1);
 				}else {
-					return leadSuitList.get(0);
+					//目前trick里面最大牌面是lead的牌
+					Card currentBiggestCard = trick.getCardsWithSuit(leadSuit).get(0);
+					//从手里出一张比当前牌所有牌要大的最小的牌
+					Card target = selectMinBigTarget(currentBiggestCard, leadSuitList);
+					if (target == null){
+						return leadSuitList.get(leadSuitList.size()-1);
+					}else {
+						return target;
+					}
 				}
 			}
 //			if player do not have lead suit cards
 			else {
 //				if player has trump suit card
-				if(this.hand.getNumberOfCardsWithSuit(trumps)>0) {
-					ArrayList<Card> trumpCards = this.hand.getCardsWithSuit(trumps);
-//					someone plays trump suit card
-					if(trick.getNumberOfCardsWithSuit(trumps)>0) {
-						Card biggestTrumpCard = trick.getCardsWithSuit(trumps).get(0);
-//						select the suitable card
-						for(int i=0;i < trumpCards.size();i++) {
-							if(trumpCards.get(i).getValue()<=biggestTrumpCard.getValue()) {
-								return trumpCards.get(i-1);
-							}
+				if(hand.getNumberOfCardsWithSuit(trump)>0) {
+					ArrayList<Card> trumpCards = hand.getCardsWithSuit(trump);
+					//someone plays trump suit card
+					if(trick.getNumberOfCardsWithSuit(trump)>0) {
+						Card biggestTrumpCard = trick.getCardsWithSuit(trump).get(0);
+						//select the suitable card
+						Card target = selectMinBigTarget(biggestTrumpCard, trumpCards);
+						if (target == null){
+							return hand.sort(Hand.SortType.RANKPRIORITY,false);
+						}else {
+							return target;
 						}
+
 					}
-//					none plays trump suit card
+					//none plays trump suit card
 					else {
 						return trumpCards.get(trumpCards.size()-1);
 					}
@@ -61,13 +73,12 @@ public class SmartPlayer implements Player {
 				}
 //				if player do not have trump suit card
 				else {
-					
+					return hand.sort(Hand.SortType.RANKPRIORITY,false);
 				}
 			}
 			
 		}
 		
-		return selected;
 	}
 
 

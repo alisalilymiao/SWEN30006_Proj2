@@ -5,7 +5,7 @@ import ch.aplu.jcardgame.Hand;
 import game.Whist;
 
 public interface Player {
-    public Card selectCard(Hand trick, Whist.Suit trumps);
+    public Card selectCard(Hand trick, Whist.Suit trump);
     public void setHand(Hand hand);
     public void updateHand(Hand hand);
     public void isLeadOrNot(int firstDeal);
