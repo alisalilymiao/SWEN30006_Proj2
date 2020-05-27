@@ -26,22 +26,18 @@ public class PlayerFactory {
                         System.exit(0);
                     }
                 }
-                int index = 0;
                 while(interactivePlayerNum >0){
                     players.add(new InteractivePlayer());
-                    index++;
                     interactivePlayerNum--;
                 }
                 while (randomPlayerNum>0){
                     players.add(new RandomPlayer());
-                    index++;
                     randomPlayerNum--;
                 }
                 break;
 
             case 2:
                 legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
-                int index2 = 0;
                 if (legalPlayerNum != 4){
                     try {
                         throw(new QuantityAnomalyException());
@@ -53,7 +49,6 @@ public class PlayerFactory {
                 }
                 while (legalPlayerNum>0){
                     players.add(new LegalPlayer());
-                    index2++;
                     legalPlayerNum--;
                 }
                 break;
@@ -73,20 +68,16 @@ public class PlayerFactory {
                     }
                 }
 
-                int index3 = 0;
                 while (interactivePlayerNum>0){
                     players.add(new InteractivePlayer());
-                    index3++;
                     interactivePlayerNum--;
                 }
                 while (smartPlayerNum > 0){
                     players.add(new SmartPlayer());
                     smartPlayerNum--;
-                    index3++;
                 }
                 while (randomPlayerNum>0){
                     players.add(new RandomPlayer());
-                    index3++;
                     randomPlayerNum--;
                 }
                 break;

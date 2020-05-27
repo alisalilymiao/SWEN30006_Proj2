@@ -3,6 +3,7 @@ package player;
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
 import game.Whist;
+import utils.RandomUtil;
 
 public class LegalPlayer implements Player
 {
@@ -21,14 +22,14 @@ public class LegalPlayer implements Player
             leadSuit = (Whist.Suit) trick.get(0).getSuit();
             if (hand.getCardsWithSuit(leadSuit).size() > 0)
             {
-                selected = Whist.randomCard(hand.getCardsWithSuit(leadSuit));
+                selected = RandomUtil.randomCard(hand.getCardsWithSuit(leadSuit));
             } else
             {
-                selected = Whist.randomCard(hand);
+                selected = RandomUtil.randomCard(hand);
             }
         } else
         {
-            selected = Whist.randomCard(hand);
+            selected = RandomUtil.randomCard(hand);
         }
 
         return selected;

@@ -6,10 +6,12 @@ import java.util.Properties;
 
 public class Configure {
 
-    static Properties gameProperties;
+    private static Properties gameProperties;
 
-    public static Properties setGameProperties(int index) throws IOException {
-        gameProperties = new Properties();
+    public static void setGameProperties(int index) throws IOException {
+        if (gameProperties == null){
+            gameProperties = new Properties();
+        }
         InputStream fps = null;
         switch (index){
             case 1:
@@ -26,12 +28,10 @@ public class Configure {
                 break;
         }
 
-        return gameProperties;
     }
 
     public static String values(String key){
-        String value = gameProperties.getProperty(key);
-        return value;
+        return gameProperties.getProperty(key);
     }
 
 }

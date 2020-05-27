@@ -7,6 +7,7 @@ import player.Player;
 import player.PlayerFactory;
 import player.RandomPlayer;
 import properties.Configure;
+import utils.RandomUtil;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -29,29 +30,6 @@ public class Whist extends CardGame
     }
 
     final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
-    //随机生成的seed
-    //static final Random random = ThreadLocalRandom.current();
-    //使用固定seed生成的random
-    static final Random random = new Random();
-
-
-    // return random Enum value
-    public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
-        int x = random.nextInt(clazz.getEnumConstants().length);
-        return clazz.getEnumConstants()[x];
-    }
-
-    // return random Card from Hand
-    public static Card randomCard(Hand hand){
-        int x = random.nextInt(hand.getNumberOfCards());
-        return hand.get(x);
-    }
-
-    // return random Card from ArrayList
-    public static Card randomCard(ArrayList<Card> list){
-        int x = random.nextInt(list.size());
-        return list.get(x);
-    }
 
     public boolean rankGreater(Card card1, Card card2) {
         return card1.getRankId() < card2.getRankId(); // Warning: Reverse rank order of cards (see comment on enum)
@@ -121,15 +99,7 @@ public class Whist extends CardGame
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players[i].setHand(hands[i]);
         }
-/*      // Set up human player for interaction
-        CardListener cardListener = new CardAdapter()  // Human Player plays card
-        {
-            public void leftDoubleClicked(Card card) {
-                selected = card;
-                hands[0].setTouchEnabled(false);
-            }
-        };
-        hands[0].addCardListener(cardListener);*/
+
         // graphics
         RowLayout[] layouts = new RowLayout[nbPlayers];
         for (int i = 0; i < nbPlayers; i++) {
@@ -145,7 +115,7 @@ public class Whist extends CardGame
 
     private Optional<Integer> playRound(){  // Returns winner, if any
         // Select and display trump suit
-        final Suit trumps = randomEnum(Suit.class);
+        final Suit trumps = RandomUtil.randomEnum(Suit.class);
         final Actor trumpsActor = new Actor("sprites/"+trumpImage[trumps.ordinal()]);
         addActor(trumpsActor, trumpsActorLocation);
         // End trump suit
@@ -154,7 +124,7 @@ public class Whist extends CardGame
         int winner;
         Card winningCard;
         Suit lead;
-        int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
+        int nextPlayer = RandomUtil.random.nextInt(nbPlayers); // randomly select player to lead for this round
 
         for (int i = 0; i < nbStartCards; i++){
             trick = new Hand(deck);
@@ -254,7 +224,7 @@ public class Whist extends CardGame
         enforceRules = Boolean.parseBoolean(Configure.values("enforceRules"));
         this.nbStartCards = nbStartCards;
         this.winningScore = winningScore;
-        random.setSeed(Seed);
+        RandomUtil.random.setSeed(Seed);
         initPlayers(gameType);
         initScore();
         Optional<Integer> winner;

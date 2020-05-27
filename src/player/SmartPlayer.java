@@ -6,6 +6,7 @@ import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
 import game.Whist;
 import game.Whist.Suit;
+import utils.RandomUtil;
 
 public class SmartPlayer implements Player {
 
@@ -17,7 +18,7 @@ public class SmartPlayer implements Player {
 		// TODO Auto-generated method stub
 		Suit leadSuit;
 		if(trick.getNumberOfCards()==0) {
-			return Whist.randomCard(hand);
+			return RandomUtil.randomCard(hand);
 		}else {
 			leadSuit= (Suit) trick.get(0).getSuit();
 			//if player has lead suit card （手里有满足要求的）
@@ -30,8 +31,10 @@ public class SmartPlayer implements Player {
 				}else {
 					//选一张比目前trick里面最大牌面是lead的牌要大的牌
 					Card currentBiggestCard = trick.getCardsWithSuit(leadSuit).get(0);
+					System.out.println(leadSuitList.size());
 					//从手里出一张比当前牌所有牌要大的最小的牌
 					Card target = selectMinBigTarget(currentBiggestCard, leadSuitList);
+
 					if (target == null){
 						return leadSuitList.get(leadSuitList.size()-1);
 					}else {
@@ -89,7 +92,8 @@ public class SmartPlayer implements Player {
     	if (Cards.size()==0)
     		return null;
 		for(int i=0;i < Cards.size();i++) {
-			if (Cards.get(i).getValue() <= biggestCard.getValue()) {
+
+			if (Cards.get(i).getRankId() > biggestCard.getRankId()) {
 				if (i==0){
 					return null;
 				}

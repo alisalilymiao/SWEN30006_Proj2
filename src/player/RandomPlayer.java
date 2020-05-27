@@ -3,6 +3,7 @@ package player;
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
 import game.Whist;
+import utils.RandomUtil;
 
 public class RandomPlayer implements Player{
 
@@ -12,8 +13,7 @@ public class RandomPlayer implements Player{
 
     @Override
     public Card selectCard(Hand trick, Whist.Suit trump) {
-        selected = Whist.randomCard(hand);
-        //hand.remove(selected,false);
+        selected = RandomUtil.randomCard(hand);
         return selected;
     }
 
