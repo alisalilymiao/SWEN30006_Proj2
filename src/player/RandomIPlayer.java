@@ -5,7 +5,7 @@ import ch.aplu.jcardgame.Hand;
 import game.Whist;
 import utils.RandomUtil;
 
-public class RandomPlayer implements Player{
+public class RandomIPlayer implements IPlayer {
 
     private Hand hand;
     private Card selected;

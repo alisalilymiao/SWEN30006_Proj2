@@ -8,15 +8,15 @@ import game.Whist;
 
 import static ch.aplu.jgamegrid.GameGrid.delay;
 
-public class InteractivePlayer implements Player{
+public class InteractiveIPlayer implements IPlayer {
 
     private Hand hand;
     private Card selected;
     private CardListener cardListener;
 
     //初始传进来告知player是第几个
-    public InteractivePlayer(){
-        cardListener = new CardAdapter()  // Human Player plays card
+    public InteractiveIPlayer(){
+        cardListener = new CardAdapter()  // Human IPlayer plays card
         {
             public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
         };

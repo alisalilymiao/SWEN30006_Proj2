@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 public class PlayerFactory {
 
-    public ArrayList<Player> initPlayer(int pattern){
-        ArrayList<Player> players = new ArrayList<>();
+    public ArrayList<IPlayer> initPlayer(int pattern){
+        ArrayList<IPlayer> IPlayers = new ArrayList<>();
         int interactivePlayerNum;
         int randomPlayerNum;
         int legalPlayerNum;
         int smartPlayerNum;
         switch (pattern){
             case 1:
-                interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
-                randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
+                interactivePlayerNum = Integer.parseInt(Configure.getInstance().values("interactivePlayerNum"));
+                randomPlayerNum = Integer.parseInt(Configure.getInstance().values("randomPlayerNum"));
                 if (interactivePlayerNum + randomPlayerNum != 4){
                     try {
                         throw(new QuantityAnomalyException());
@@ -27,17 +27,17 @@ public class PlayerFactory {
                     }
                 }
                 while(interactivePlayerNum >0){
-                    players.add(new InteractivePlayer());
+                    IPlayers.add(new InteractiveIPlayer());
                     interactivePlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    players.add(new RandomPlayer());
+                    IPlayers.add(new RandomIPlayer());
                     randomPlayerNum--;
                 }
                 break;
 
             case 2:
-                legalPlayerNum = Integer.parseInt(Configure.values("legalPlayerNum"));
+                legalPlayerNum = Integer.parseInt(Configure.getInstance().values("legalPlayerNum"));
                 if (legalPlayerNum != 4){
                     try {
                         throw(new QuantityAnomalyException());
@@ -48,15 +48,15 @@ public class PlayerFactory {
                     }
                 }
                 while (legalPlayerNum>0){
-                    players.add(new LegalPlayer());
+                    IPlayers.add(new LegalIPlayer());
                     legalPlayerNum--;
                 }
                 break;
 
             case 3:
-                interactivePlayerNum = Integer.parseInt(Configure.values("interactivePlayerNum"));
-                randomPlayerNum = Integer.parseInt(Configure.values("randomPlayerNum"));
-                smartPlayerNum = Integer.parseInt(Configure.values("smartPlayerNum"));
+                interactivePlayerNum = Integer.parseInt(Configure.getInstance().values("interactivePlayerNum"));
+                randomPlayerNum = Integer.parseInt(Configure.getInstance().values("randomPlayerNum"));
+                smartPlayerNum = Integer.parseInt(Configure.getInstance().values("smartPlayerNum"));
 
                 if (interactivePlayerNum+randomPlayerNum+smartPlayerNum != 4){
                     try {
@@ -69,21 +69,21 @@ public class PlayerFactory {
                 }
 
                 while (interactivePlayerNum>0){
-                    players.add(new InteractivePlayer());
+                    IPlayers.add(new InteractiveIPlayer());
                     interactivePlayerNum--;
                 }
                 while (smartPlayerNum > 0){
-                    players.add(new SmartPlayer());
+                    IPlayers.add(new SmartIPlayer());
                     smartPlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    players.add(new RandomPlayer());
+                    IPlayers.add(new RandomIPlayer());
                     randomPlayerNum--;
                 }
                 break;
 
         }
-        return players;
+        return IPlayers;
     }
 
 }

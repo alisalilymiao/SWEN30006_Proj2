@@ -2,10 +2,9 @@ package game;
 
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
-import player.InteractivePlayer;
-import player.Player;
-import player.PlayerFactory;
-import player.RandomPlayer;
+import player.*;
+import player.InteractiveIPlayer;
+import player.IPlayer;
 import properties.Configure;
 import utils.RandomUtil;
 
@@ -40,7 +39,7 @@ public class Whist extends CardGame
     public final int nbStartCards;
     public final int winningScore;
     //尝试初始化所有的player
-    private Player[] players;
+    private IPlayer[] IPlayers;
 
     private final int handWidth = 400;
     private final int trickWidth = 40;
@@ -90,14 +89,14 @@ public class Whist extends CardGame
 
     private void initPlayers(int gameType) throws QuantityAnomalyException {
         PlayerFactory playerFactory = new PlayerFactory();
-        players = playerFactory.initPlayer(gameType).toArray(new Player[0]);
+        IPlayers = playerFactory.initPlayer(gameType).toArray(new IPlayer[0]);
     }
 
     private void initRound() {
         hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
-            players[i].setHand(hands[i]);
+            IPlayers[i].setHand(hands[i]);
         }
 
         // graphics
@@ -130,13 +129,13 @@ public class Whist extends CardGame
             trick = new Hand(deck);
             selected = null;
 
-            if (0 == nextPlayer || players[nextPlayer] instanceof InteractivePlayer){
-                setStatus("Player "+nextPlayer+" double-click on card to lead.");
+            if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractiveIPlayer){
+                setStatus("IPlayer "+nextPlayer+" double-click on card to lead.");
             } else {
-                setStatusText("Player " + nextPlayer + " thinking...");
+                setStatusText("IPlayer " + nextPlayer + " thinking...");
                 delay(thinkingTime);
             }
-            selected = players[nextPlayer].selectCard(trick, trumps);
+            selected = IPlayers[nextPlayer].selectCard(trick, trumps);
 
             // Lead with selected card
             trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -146,7 +145,7 @@ public class Whist extends CardGame
             lead = (Suit) selected.getSuit();
             //如果选中的卡转化到trick上之后，卡片的数量减少1
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-            players[nextPlayer].updateHand(hands[nextPlayer]);
+            IPlayers[nextPlayer].updateHand(hands[nextPlayer]);
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -155,13 +154,13 @@ public class Whist extends CardGame
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
 
-                if (0 == nextPlayer || players[nextPlayer] instanceof InteractivePlayer){
-                    setStatus("Player "+nextPlayer+" double-click on card to choose the card.");
+                if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractiveIPlayer){
+                    setStatus("IPlayer "+nextPlayer+" double-click on card to choose the card.");
                 } else {
-                    setStatusText("Player " + nextPlayer + " thinking...");
+                    setStatusText("IPlayer " + nextPlayer + " thinking...");
                     delay(thinkingTime);
                 }
-                selected = players[nextPlayer].selectCard(trick, trumps);
+                selected = IPlayers[nextPlayer].selectCard(trick, trumps);
 
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -183,7 +182,7 @@ public class Whist extends CardGame
                 }
                 // End Check
                 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-                players[nextPlayer].updateHand(hands[nextPlayer]);
+                IPlayers[nextPlayer].updateHand(hands[nextPlayer]);
                 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
                 System.out.println(" played: suit = " +    selected.getSuit() + ", rank = " +    selected.getRankId());
                 if ( // beat current winner with higher card
@@ -200,7 +199,7 @@ public class Whist extends CardGame
             trick.setView(this, new RowLayout(hideLocation, 0));
             trick.draw();
             nextPlayer = winner;
-            setStatusText("Player " + nextPlayer + " wins trick.");
+            setStatusText("IPlayer " + nextPlayer + " wins trick.");
             scores[nextPlayer]++;
             updateScore(nextPlayer);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
@@ -217,11 +216,11 @@ public class Whist extends CardGame
         System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
         Scanner scanner = new Scanner(System.in);
         int gameType = scanner.nextInt();
-        Configure.setGameProperties(gameType);
-        int Seed = Integer.parseInt(Configure.values("Seed"));
-        int nbStartCards = Integer.parseInt(Configure.values("nbStartCards"));
-        int winningScore = Integer.parseInt(Configure.values("winningScore"));
-        enforceRules = Boolean.parseBoolean(Configure.values("enforceRules"));
+        Configure.getInstance().setGameProperties(gameType);
+        int Seed = Integer.parseInt(Configure.getInstance().values("Seed"));
+        int nbStartCards = Integer.parseInt(Configure.getInstance().values("nbStartCards"));
+        int winningScore = Integer.parseInt(Configure.getInstance().values("winningScore"));
+        enforceRules = Boolean.parseBoolean(Configure.getInstance().values("enforceRules"));
         this.nbStartCards = nbStartCards;
         this.winningScore = winningScore;
         RandomUtil.random.setSeed(Seed);
