@@ -12,7 +12,8 @@ public class RandomIPlayer implements IPlayer {
 
 
     @Override
-    public Card selectCard(Hand trick, Whist.Suit trump) {
+    public Card selectCard(Hand trick, Whist.Suit trump)
+    {
         selected = RandomUtil.randomCard(hand);
         return selected;
     }
