@@ -27,11 +27,11 @@ public class PlayerFactory {
                     }
                 }
                 while(interactivePlayerNum >0){
-                    IPlayers.add(new InteractiveIPlayer());
+                    IPlayers.add(new InteractivePlayer());
                     interactivePlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    IPlayers.add(new RandomIPlayer());
+                    IPlayers.add(new RandomPlayer());
                     randomPlayerNum--;
                 }
                 break;
@@ -48,7 +48,7 @@ public class PlayerFactory {
                     }
                 }
                 while (legalPlayerNum>0){
-                    IPlayers.add(new LegalIPlayer());
+                    IPlayers.add(new LegalPlayer());
                     legalPlayerNum--;
                 }
                 break;
@@ -69,15 +69,15 @@ public class PlayerFactory {
                 }
 
                 while (interactivePlayerNum>0){
-                    IPlayers.add(new InteractiveIPlayer());
+                    IPlayers.add(new InteractivePlayer());
                     interactivePlayerNum--;
                 }
                 while (smartPlayerNum > 0){
-                    IPlayers.add(new SmartIPlayer());
+                    IPlayers.add(new SmartPlayer());
                     smartPlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    IPlayers.add(new RandomIPlayer());
+                    IPlayers.add(new RandomPlayer());
                     randomPlayerNum--;
                 }
                 break;

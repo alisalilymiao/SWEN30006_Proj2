@@ -3,7 +3,7 @@ package game;
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 import player.*;
-import player.InteractiveIPlayer;
+import player.InteractivePlayer;
 import player.IPlayer;
 import properties.Configure;
 import utils.RandomUtil;
@@ -40,6 +40,8 @@ public class Whist extends CardGame
     public final int winningScore;
     //尝试初始化所有的player
     private IPlayer[] IPlayers;
+    //初始设定游戏的类型
+    private int gameType;
 
     private final int handWidth = 400;
     private final int trickWidth = 40;
@@ -129,10 +131,10 @@ public class Whist extends CardGame
             trick = new Hand(deck);
             selected = null;
 
-            if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractiveIPlayer){
-                setStatus("IPlayer "+nextPlayer+" double-click on card to lead.");
+            if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractivePlayer){
+                setStatus("Player "+nextPlayer+" double-click on card to lead.");
             } else {
-                setStatusText("IPlayer " + nextPlayer + " thinking...");
+                setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
             }
             selected = IPlayers[nextPlayer].selectCard(trick, trumps);
@@ -154,10 +156,10 @@ public class Whist extends CardGame
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
 
-                if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractiveIPlayer){
-                    setStatus("IPlayer "+nextPlayer+" double-click on card to choose the card.");
+                if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractivePlayer){
+                    setStatus("Player "+nextPlayer+" double-click on card to choose the card.");
                 } else {
-                    setStatusText("IPlayer " + nextPlayer + " thinking...");
+                    setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
                 }
                 selected = IPlayers[nextPlayer].selectCard(trick, trumps);
@@ -195,6 +197,15 @@ public class Whist extends CardGame
                 }
                 // End Follow
             }
+
+            if (gameType == 3){
+                for (IPlayer player: IPlayers){
+                    if (player instanceof SmartPlayer){
+                        ((SmartPlayer) player).updateInformation(trick);
+                    }
+                }
+            }
+
             delay(600);
             trick.setView(this, new RowLayout(hideLocation, 0));
             trick.draw();
@@ -212,10 +223,12 @@ public class Whist extends CardGame
         super(700, 700, 30);
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
+
         setStatusText("Users select one of the game pattern: 1.original 2.legal 3.smart");
         System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
         Scanner scanner = new Scanner(System.in);
-        int gameType = scanner.nextInt();
+        gameType = scanner.nextInt();
+
         Configure.getInstance().setGameProperties(gameType);
         int Seed = Integer.parseInt(Configure.getInstance().values("Seed"));
         int nbStartCards = Integer.parseInt(Configure.getInstance().values("nbStartCards"));

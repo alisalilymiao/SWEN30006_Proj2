@@ -5,7 +5,7 @@ import ch.aplu.jcardgame.Hand;
 import game.Whist;
 import utils.RandomUtil;
 
-public class LegalIPlayer implements IPlayer
+public class LegalPlayer implements IPlayer
 {
     private Hand hand;
     private Card selected;

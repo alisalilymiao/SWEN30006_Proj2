@@ -1,16 +1,19 @@
 package player;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
 import game.Whist.Suit;
 import utils.RandomUtil;
 
-public class SmartIPlayer implements IPlayer {
+public class SmartPlayer implements IPlayer {
 
     private Hand hand;
     private Card selected;
+
+    private HashSet<Card> allUsedCard = new HashSet<>();
 
 	@Override
 	public Card selectCard(Hand trick, Suit trump) {
@@ -19,6 +22,13 @@ public class SmartIPlayer implements IPlayer {
 		if(trick.getNumberOfCards()==0) {
 			return RandomUtil.randomCard(hand);
 		}else {
+
+			//当牌的数量大于0的时候记录一下当前的牌
+			for (int i=0;i<trick.getNumberOfCards();i++){
+				allUsedCard.add(trick.get(i));
+			}
+			System.out.println("当smart出牌的时候，我知道的牌的数量:"+allUsedCard.size());
+
 			leadSuit= (Suit) trick.get(0).getSuit();
 			//if players have cards of lead suit, they should play that. 
 			if(hand.getNumberOfCardsWithSuit(leadSuit)>0) {
@@ -71,6 +81,8 @@ public class SmartIPlayer implements IPlayer {
 			
 		}
 
+
+
 	}
 
 
@@ -83,6 +95,13 @@ public class SmartIPlayer implements IPlayer {
     public void updateHand(Hand hand) {
         this.hand = hand;
     }
+
+	public void updateInformation(Hand trick){
+		for (int i=0;i<trick.getNumberOfCards();i++){
+			allUsedCard.add(trick.get(i));
+		}
+		System.out.println("在玩儿完几轮之后我知道的牌的数量："+allUsedCard.size());
+	}
 
 
     //choose a card from  an arrraylist that is the minimum of the cards bigger than biggest card of the trick
