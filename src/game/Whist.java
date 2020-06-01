@@ -216,7 +216,14 @@ public class Whist extends CardGame
         System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
         Scanner scanner = new Scanner(System.in);
         int gameType = scanner.nextInt();
+
+        while (gameType < 1 || gameType > 3)
+        {
+            System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
+            gameType = scanner.nextInt();
+        }
         Configure.getInstance().setGameProperties(gameType);
+
         int Seed = Integer.parseInt(Configure.getInstance().values("Seed"));
         int nbStartCards = Integer.parseInt(Configure.getInstance().values("nbStartCards"));
         int winningScore = Integer.parseInt(Configure.getInstance().values("winningScore"));
