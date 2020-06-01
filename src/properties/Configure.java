@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class Configure {
+public class Configure
+{
     private static Configure configure = new Configure();
 
-    private Configure(){
+    private Configure(){}
 
-    }
-
-    public static Configure getInstance(){
+    public static Configure getInstance()
+    {
         return configure;
     }
 
@@ -19,7 +19,8 @@ public class Configure {
 
     public void setGameProperties(int index) throws IOException
     {
-        if (gameProperties == null){
+        if (gameProperties == null)
+        {
             gameProperties = new Properties();
         }
         InputStream fps = null;
@@ -38,7 +39,6 @@ public class Configure {
                 gameProperties.load(fps);
                 break;
         }
-
     }
 
     public String values(String key){
