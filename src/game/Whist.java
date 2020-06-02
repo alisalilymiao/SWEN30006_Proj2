@@ -95,7 +95,7 @@ public class Whist extends CardGame
     }
 
     private void initRound() {
-        hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
+        hands = dealingOut(nbPlayers, nbStartCards,deck); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             IPlayers[i].setHand(hands[i]);
@@ -253,7 +253,38 @@ public class Whist extends CardGame
         // System.out.println("Working Directory = " + System.getProperty("user.dir"));
         new Whist();
     }
+    
+    
+    public Hand[] dealingOut(int nbPlayers, int nbCardsPerPlayer, Deck deck) {
+        int nbCard = Suit.values().length*Rank.values().length;
+    	if (nbPlayers * nbCardsPerPlayer > nbCard) {
+    		fail("Error in Deck.dealing out.\n" + nbCard + " cards in deck. Not enough for" + "\n" + nbPlayers + ((nbPlayers > 1) ? " players with " : "player with ") + nbCardsPerPlayer + ((nbCardsPerPlayer > 1) ? " cards per player." : "card per player.") + "\nApplication will terminate.");
+    	 }
 
+       
+    	ArrayList<Card> cards = new ArrayList<Card>();
+    	for (Suit suit : Suit.values()) {      
+    		for (Rank rank : Rank.values()) { 
+    		Card card = new Card(deck, suit, rank);
+    		cards.add(card);
+    	    } 
+    	} 
+   
+    	
+    	    Collections.shuffle(cards,RandomUtil.random);
+    	 
+    	     Hand[] hands = new Hand[nbPlayers + 1];
+    	     for (int i = 0; i < nbPlayers; i++) {
+    	      
+    	       hands[i] = new Hand(deck);
+    	       for (int k = 0; k < nbCardsPerPlayer; k++)
+    	         hands[i].insert((Card)cards.get(i * nbCardsPerPlayer + k), false); 
+    	} 
+    	    hands[nbPlayers] = new Hand(deck);
+    	     for (int p = nbPlayers * nbCardsPerPlayer; p < nbCard; p++)
+    	       hands[nbPlayers].insert((Card)cards.get(p), false); 
+    	    return hands;
+    	  }
 
 
 }
