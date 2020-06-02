@@ -1,4 +1,4 @@
-package player;
+package players;
 
 import game.QuantityAnomalyException;
 import properties.Configure;
@@ -7,8 +7,9 @@ import java.util.ArrayList;
 
 public class PlayerFactory {
 
-    public ArrayList<IPlayer> initPlayer(int pattern){
-        ArrayList<IPlayer> IPlayers = new ArrayList<>();
+
+    public ArrayList<Player> initPlayer(int pattern){
+        ArrayList<Player> players = new ArrayList<>();
         int interactivePlayerNum;
         int randomPlayerNum;
         int legalPlayerNum;
@@ -27,11 +28,11 @@ public class PlayerFactory {
                     }
                 }
                 while(interactivePlayerNum >0){
-                    IPlayers.add(new InteractivePlayer());
+                    players.add(new Player("interactive"));
                     interactivePlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    IPlayers.add(new RandomPlayer());
+                    players.add(new Player("random"));
                     randomPlayerNum--;
                 }
                 break;
@@ -48,7 +49,7 @@ public class PlayerFactory {
                     }
                 }
                 while (legalPlayerNum>0){
-                    IPlayers.add(new LegalPlayer());
+                    players.add(new Player("legal"));
                     legalPlayerNum--;
                 }
                 break;
@@ -69,21 +70,21 @@ public class PlayerFactory {
                 }
 
                 while (interactivePlayerNum>0){
-                    IPlayers.add(new InteractivePlayer());
+                    players.add(new Player("interactive"));
                     interactivePlayerNum--;
                 }
                 while (smartPlayerNum > 0){
-                    IPlayers.add(new SmartPlayer());
+                    players.add(new Player("smart"));
                     smartPlayerNum--;
                 }
                 while (randomPlayerNum>0){
-                    IPlayers.add(new RandomPlayer());
+                    players.add(new Player("random"));
                     randomPlayerNum--;
                 }
                 break;
 
         }
-        return IPlayers;
+        return players;
     }
 
 }

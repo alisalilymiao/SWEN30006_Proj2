@@ -1,4 +1,4 @@
-package player;
+package strategy;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.CardAdapter;
@@ -8,39 +8,27 @@ import game.Whist;
 
 import static ch.aplu.jgamegrid.GameGrid.delay;
 
-public class InteractivePlayer implements IPlayer {
+public class InteractiveStrategy implements IStrategy{
 
     private Hand hand;
     private Card selected;
     private CardListener cardListener;
 
-    //初始传进来告知player是第几个
-    public InteractivePlayer(){
+    public InteractiveStrategy(Hand hand){
         cardListener = new CardAdapter()  // Human IPlayer plays card
         {
             public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
         };
-
+        this.hand = hand;
+        this.hand.addCardListener(cardListener);
     }
 
     @Override
-    public Card selectCard(Hand trick, Whist.Suit trump) {
+    public Card selectCard(Hand hand, Hand trick, Whist.Suit trump) {
+        selected = null;
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);
-        //hand.remove(selected,false);
         return selected;
-    }
-
-    @Override
-    public void setHand(Hand hand) {
-        this.hand = hand;
-        hand.addCardListener(cardListener);
-    }
-
-    @Override
-    public void updateHand(Hand hand) {
-        this.hand = hand;
-        selected = null;
     }
 
 }

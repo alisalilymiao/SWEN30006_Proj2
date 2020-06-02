@@ -1,21 +1,23 @@
 package game;
 
 import ch.aplu.jcardgame.*;
-import ch.aplu.jgamegrid.*;
-import player.*;
-import player.InteractivePlayer;
-import player.IPlayer;
+import ch.aplu.jgamegrid.Actor;
+import ch.aplu.jgamegrid.Location;
+import ch.aplu.jgamegrid.TextActor;
+import players.Player;
+import players.PlayerFactory;
 import properties.Configure;
+import strategy.InteractiveStrategy;
 import utils.RandomUtil;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Scanner;
 
-public class Whist extends CardGame
-{
-
+public class Whist extends CardGame {
     public enum Suit
     {
         SPADES, HEARTS, DIAMONDS, CLUBS
@@ -39,13 +41,13 @@ public class Whist extends CardGame
     public final int nbStartCards;
     public final int winningScore;
     //尝试初始化所有的player
-    private IPlayer[] IPlayers;
+    private Player[] players;
     //初始设定游戏的类型
     private int gameType;
 
     private final int handWidth = 400;
     private final int trickWidth = 40;
-    private final Deck deck = new Deck(Suit.values(), Rank.values(), "cover");
+    private final Deck deck = new Deck(Whist.Suit.values(), Whist.Rank.values(), "cover");
     private final Location[] handLocations = {
             new Location(350, 625),
             new Location(75, 350),
@@ -70,7 +72,6 @@ public class Whist extends CardGame
     public void setStatus(String string) { setStatusText(string); }
 
     private int[] scores = new int[nbPlayers];
-
     Font bigFont = new Font("Serif", Font.BOLD, 36);
 
     private void initScore() {
@@ -89,16 +90,18 @@ public class Whist extends CardGame
 
     private Card selected;
 
-    private void initPlayers(int gameType) throws QuantityAnomalyException {
+    private void initPlayers(int gameType) throws QuantityAnomalyException{
         PlayerFactory playerFactory = new PlayerFactory();
-        IPlayers = playerFactory.initPlayer(gameType).toArray(new IPlayer[0]);
+        players = playerFactory.initPlayer(gameType).toArray(new Player[0]);
     }
 
-    private void initRound() {
+    private void initRound(){
         hands = dealingOut(nbPlayers, nbStartCards,deck); // Last element of hands is leftover cards; these are ignored
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
-            IPlayers[i].setHand(hands[i]);
+            players[i].setHand(hands[i]);
+            //选择玩儿的策略
+            players[i].setPlayStrategy();
         }
 
         // graphics
@@ -113,10 +116,9 @@ public class Whist extends CardGame
         }
     }
 
-
-    private Optional<Integer> playRound(){  // Returns winner, if any
+    private Optional<Integer> playRound(){
         // Select and display trump suit
-        final Suit trumps = RandomUtil.randomEnum(Suit.class);
+        final Whist.Suit trumps = RandomUtil.randomEnum(Whist.Suit.class);
         final Actor trumpsActor = new Actor("sprites/"+trumpImage[trumps.ordinal()]);
         addActor(trumpsActor, trumpsActorLocation);
         // End trump suit
@@ -124,30 +126,30 @@ public class Whist extends CardGame
         Hand trick;
         int winner;
         Card winningCard;
-        Suit lead;
+        Whist.Suit lead;
         int nextPlayer = RandomUtil.random.nextInt(nbPlayers); // randomly select player to lead for this round
 
         for (int i = 0; i < nbStartCards; i++){
             trick = new Hand(deck);
             selected = null;
 
-            if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractivePlayer){
+            if (0 == nextPlayer || players[nextPlayer].getPlayStrategy() instanceof InteractiveStrategy){
                 setStatus("Player "+nextPlayer+" double-click on card to lead.");
             } else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
             }
-            selected = IPlayers[nextPlayer].selectCard(trick, trumps);
+            selected = players[nextPlayer].playerSelectCard(trick, trumps);
 
             // Lead with selected card
             trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
             trick.draw();
             selected.setVerso(false);
             // No restrictions on the card being lead
-            lead = (Suit) selected.getSuit();
+            lead = (Whist.Suit) selected.getSuit();
             //如果选中的卡转化到trick上之后，卡片的数量减少1
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-            IPlayers[nextPlayer].updateHand(hands[nextPlayer]);
+            players[nextPlayer].updateHand(hands[nextPlayer]);
             winner = nextPlayer;
             winningCard = selected;
             // End Lead
@@ -156,13 +158,13 @@ public class Whist extends CardGame
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
 
-                if (0 == nextPlayer || IPlayers[nextPlayer] instanceof InteractivePlayer){
+                if (0 == nextPlayer || players[nextPlayer].getPlayStrategy() instanceof InteractiveStrategy){
                     setStatus("Player "+nextPlayer+" double-click on card to choose the card.");
                 } else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
                 }
-                selected = IPlayers[nextPlayer].selectCard(trick, trumps);
+                selected = players[nextPlayer].playerSelectCard(trick, trumps);
 
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -184,7 +186,7 @@ public class Whist extends CardGame
                 }
                 // End Check
                 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-                IPlayers[nextPlayer].updateHand(hands[nextPlayer]);
+                players[nextPlayer].updateHand(hands[nextPlayer]);
                 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
                 System.out.println(" played: suit = " +    selected.getSuit() + ", rank = " +    selected.getRankId());
                 if ( // beat current winner with higher card
@@ -198,14 +200,6 @@ public class Whist extends CardGame
                 // End Follow
             }
 
-            if (gameType == 3){
-                for (IPlayer player: IPlayers){
-                    if (player instanceof SmartPlayer){
-                        ((SmartPlayer) player).updateInformation(trick);
-                    }
-                }
-            }
-
             delay(600);
             trick.setView(this, new RowLayout(hideLocation, 0));
             trick.draw();
@@ -215,11 +209,14 @@ public class Whist extends CardGame
             updateScore(nextPlayer);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
         }
+
         removeActor(trumpsActor);
         return Optional.empty();
     }
 
-    public Whist() throws IOException, QuantityAnomalyException {
+
+
+    public Whist() throws IOException, QuantityAnomalyException{
         super(700, 700, 30);
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
@@ -240,6 +237,7 @@ public class Whist extends CardGame
         initPlayers(gameType);
         initScore();
         Optional<Integer> winner;
+
         do {
             initRound();
             winner = playRound();
@@ -253,38 +251,39 @@ public class Whist extends CardGame
         // System.out.println("Working Directory = " + System.getProperty("user.dir"));
         new Whist();
     }
-    
-    
-    public Hand[] dealingOut(int nbPlayers, int nbCardsPerPlayer, Deck deck) {
-        int nbCard = Suit.values().length*Rank.values().length;
-    	if (nbPlayers * nbCardsPerPlayer > nbCard) {
-    		fail("Error in Deck.dealing out.\n" + nbCard + " cards in deck. Not enough for" + "\n" + nbPlayers + ((nbPlayers > 1) ? " players with " : "player with ") + nbCardsPerPlayer + ((nbCardsPerPlayer > 1) ? " cards per player." : "card per player.") + "\nApplication will terminate.");
-    	 }
 
-       
-    	ArrayList<Card> cards = new ArrayList<Card>();
-    	for (Suit suit : Suit.values()) {      
-    		for (Rank rank : Rank.values()) { 
-    		Card card = new Card(deck, suit, rank);
-    		cards.add(card);
-    	    } 
-    	} 
-   
-    	
-    	    Collections.shuffle(cards,RandomUtil.random);
-    	 
-    	     Hand[] hands = new Hand[nbPlayers + 1];
-    	     for (int i = 0; i < nbPlayers; i++) {
-    	      
-    	       hands[i] = new Hand(deck);
-    	       for (int k = 0; k < nbCardsPerPlayer; k++)
-    	         hands[i].insert((Card)cards.get(i * nbCardsPerPlayer + k), false); 
-    	} 
-    	    hands[nbPlayers] = new Hand(deck);
-    	     for (int p = nbPlayers * nbCardsPerPlayer; p < nbCard; p++)
-    	       hands[nbPlayers].insert((Card)cards.get(p), false); 
-    	    return hands;
-    	  }
+
+    public Hand[] dealingOut(int nbPlayers, int nbCardsPerPlayer, Deck deck) {
+        int nbCard = Whist.Suit.values().length* Whist.Rank.values().length;
+        if (nbPlayers * nbCardsPerPlayer > nbCard) {
+            fail("Error in Deck.dealing out.\n" + nbCard + " cards in deck. Not enough for" + "\n" + nbPlayers + ((nbPlayers > 1) ? " players with " : "player with ") + nbCardsPerPlayer + ((nbCardsPerPlayer > 1) ? " cards per player." : "card per player.") + "\nApplication will terminate.");
+        }
+
+
+        ArrayList<Card> cards = new ArrayList<Card>();
+        for (Whist.Suit suit : Whist.Suit.values()) {
+            for (Whist.Rank rank : Whist.Rank.values()) {
+                Card card = new Card(deck, suit, rank);
+                cards.add(card);
+            }
+        }
+
+
+        Collections.shuffle(cards,RandomUtil.random);
+
+        Hand[] hands = new Hand[nbPlayers + 1];
+        for (int i = 0; i < nbPlayers; i++) {
+
+            hands[i] = new Hand(deck);
+            for (int k = 0; k < nbCardsPerPlayer; k++)
+                hands[i].insert((Card)cards.get(i * nbCardsPerPlayer + k), false);
+        }
+        hands[nbPlayers] = new Hand(deck);
+        for (int p = nbPlayers * nbCardsPerPlayer; p < nbCard; p++)
+            hands[nbPlayers].insert((Card)cards.get(p), false);
+        return hands;
+    }
+
 
 
 }
