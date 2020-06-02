@@ -203,6 +203,7 @@ public class Whist extends CardGame {
 
             //判断玩儿牌的player之中有没有smart player
             for (Player player:players){
+                player.setAllscores(scores);
                 if (player.getPlayStrategy() instanceof SmartStrategy){
                     ((SmartStrategy)player.getPlayStrategy()).updateInformation(trick);
                 }

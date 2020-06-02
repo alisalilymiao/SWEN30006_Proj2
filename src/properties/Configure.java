@@ -22,7 +22,7 @@ public class Configure {
             gameProperties = new Properties();
         }
         InputStream fps = null;
-        fps = Configure.class.getClassLoader().getResourceAsStream("properties/original.properties");
+        fps = Configure.class.getClassLoader().getResourceAsStream("properties/whist.properties");
         gameProperties.load(fps);
 
     }

@@ -59,4 +59,8 @@ public class Player {
     public IStrategy getPlayStrategy() {
         return playStrategy;
     }
+
+    public void setAllscores(int[] allscores) {
+        this.allscores = allscores;
+    }
 }
