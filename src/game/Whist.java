@@ -8,6 +8,7 @@ import players.Player;
 import players.PlayerFactory;
 import properties.Configure;
 import strategy.InteractiveStrategy;
+import strategy.SmartStrategy;
 import utils.RandomUtil;
 
 import java.awt.*;
@@ -198,6 +199,14 @@ public class Whist extends CardGame {
                     winningCard = selected;
                 }
                 // End Follow
+            }
+
+            if (gameType == 3){
+                for (Player player:players){
+                    if (player.getPlayStrategy() instanceof SmartStrategy){
+                        ((SmartStrategy)player.getPlayStrategy()).updateInformation(trick);
+                    }
+                }
             }
 
             delay(600);
