@@ -17,25 +17,13 @@ public class Configure {
 
     private Properties gameProperties;
 
-    public void setGameProperties(int index) throws IOException {
+    public void setGameProperties() throws IOException {
         if (gameProperties == null){
             gameProperties = new Properties();
         }
         InputStream fps = null;
-        switch (index){
-            case 1:
-                fps = Configure.class.getClassLoader().getResourceAsStream("properties/original.properties");
-                gameProperties.load(fps);
-                break;
-            case 2:
-                fps = Configure.class.getClassLoader().getResourceAsStream("properties/legal.properties");
-                gameProperties.load(fps);
-                break;
-            case 3:
-                fps = Configure.class.getClassLoader().getResourceAsStream("properties/smart.properties");
-                gameProperties.load(fps);
-                break;
-        }
+        fps = Configure.class.getClassLoader().getResourceAsStream("properties/original.properties");
+        gameProperties.load(fps);
 
     }
 

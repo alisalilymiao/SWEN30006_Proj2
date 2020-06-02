@@ -91,9 +91,9 @@ public class Whist extends CardGame {
 
     private Card selected;
 
-    private void initPlayers(int gameType) throws QuantityAnomalyException{
+    private void initPlayers() throws QuantityAnomalyException{
         PlayerFactory playerFactory = new PlayerFactory();
-        players = playerFactory.initPlayer(gameType).toArray(new Player[0]);
+        players = playerFactory.initPlayer().toArray(new Player[0]);
     }
 
     private void initRound(){
@@ -201,13 +201,13 @@ public class Whist extends CardGame {
                 // End Follow
             }
 
-            if (gameType == 3){
-                for (Player player:players){
-                    if (player.getPlayStrategy() instanceof SmartStrategy){
-                        ((SmartStrategy)player.getPlayStrategy()).updateInformation(trick);
-                    }
+            //判断玩儿牌的player之中有没有smart player
+            for (Player player:players){
+                if (player.getPlayStrategy() instanceof SmartStrategy){
+                    ((SmartStrategy)player.getPlayStrategy()).updateInformation(trick);
                 }
             }
+
 
             delay(600);
             trick.setView(this, new RowLayout(hideLocation, 0));
@@ -230,12 +230,12 @@ public class Whist extends CardGame {
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
 
-        setStatusText("Users select one of the game pattern: 1.original 2.legal 3.smart");
+        /*setStatusText("Users select one of the game pattern: 1.original 2.legal 3.smart");
         System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
         Scanner scanner = new Scanner(System.in);
-        gameType = scanner.nextInt();
+        gameType = scanner.nextInt();*/
 
-        Configure.getInstance().setGameProperties(gameType);
+        Configure.getInstance().setGameProperties();
         int Seed = Integer.parseInt(Configure.getInstance().values("Seed"));
         int nbStartCards = Integer.parseInt(Configure.getInstance().values("nbStartCards"));
         int winningScore = Integer.parseInt(Configure.getInstance().values("winningScore"));
@@ -243,7 +243,7 @@ public class Whist extends CardGame {
         this.nbStartCards = nbStartCards;
         this.winningScore = winningScore;
         RandomUtil.random.setSeed(Seed);
-        initPlayers(gameType);
+        initPlayers();
         initScore();
         Optional<Integer> winner;
 
