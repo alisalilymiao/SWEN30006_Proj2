@@ -41,9 +41,9 @@ public class Whist extends CardGame {
     public final int nbPlayers = 4;
     public final int nbStartCards;
     public final int winningScore;
-    //尝试初始化所有的player
+    //init all players
     private Player[] players;
-    //初始设定游戏的类型
+    //set the game type
     private int gameType;
 
     private final int handWidth = 400;
@@ -101,7 +101,7 @@ public class Whist extends CardGame {
         for (int i = 0; i < nbPlayers; i++) {
             hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players[i].setHand(hands[i]);
-            //选择玩儿的策略
+            //select play strategy
             players[i].setPlayStrategy();
         }
 
@@ -148,7 +148,6 @@ public class Whist extends CardGame {
             selected.setVerso(false);
             // No restrictions on the card being lead
             lead = (Whist.Suit) selected.getSuit();
-            //如果选中的卡转化到trick上之后，卡片的数量减少1
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             players[nextPlayer].updateHand(hands[nextPlayer]);
             winner = nextPlayer;
@@ -201,7 +200,7 @@ public class Whist extends CardGame {
                 // End Follow
             }
 
-            //判断玩儿牌的player之中有没有smart player
+            //identify whether there is a smart player among all players
             for (Player player:players){
                 player.setAllscores(scores);
                 if (player.getPlayStrategy() instanceof SmartStrategy){
@@ -216,6 +215,7 @@ public class Whist extends CardGame {
             nextPlayer = winner;
             setStatusText("IPlayer " + nextPlayer + " wins trick.");
             scores[nextPlayer]++;
+            players[nextPlayer].setScore(scores[nextPlayer]);
             updateScore(nextPlayer);
             if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
         }

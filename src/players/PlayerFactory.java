@@ -5,6 +5,9 @@ import properties.Configure;
 
 import java.util.ArrayList;
 
+/**
+ * This class used to init all players
+ */
 public class PlayerFactory {
 
 

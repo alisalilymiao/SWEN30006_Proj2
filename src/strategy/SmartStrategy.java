@@ -20,11 +20,11 @@ public class SmartStrategy implements IStrategy{
             return RandomUtil.randomCard(hand);
         }else {
 
-            //当牌的数量大于0的时候记录一下当前的牌
+            //remember other users' card
             for (int i=0;i<trick.getNumberOfCards();i++){
                 allUsedCard.add(trick.get(i));
             }
-            System.out.println("当smart出牌的时候，我知道的牌的数量:"+allUsedCard.size());
+            //System.out.println("The total number of Card I know"+allUsedCard.size());
 
             leadSuit= (Whist.Suit) trick.get(0).getSuit();
             //if players have cards of lead suit, they should play that.
@@ -36,8 +36,9 @@ public class SmartStrategy implements IStrategy{
                 }else {
                     //choose a minimum biggest card
                     Card currentBiggestCard = trick.getCardsWithSuit(leadSuit).get(0);
-                    System.out.println(leadSuitList.size());
-                    //从手里出一张比当前牌所有牌要大的最小的牌
+                    //System.out.println(leadSuitList.size());
+                    //select a card from  an arrraylist that is the minimum of the cards
+                    // bigger than the currentBiggestCard
                     Card target = selectMinBigTarget(currentBiggestCard, leadSuitList);
 
                     if (target == null){
@@ -79,7 +80,7 @@ public class SmartStrategy implements IStrategy{
         }
     }
 
-    //choose a card from  an arrraylist that is the minimum of the cards bigger than biggest card of the trick
+    //choose a card from  an arrraylist that is the minimum of the cards bigger than biggest card of the biggest card
     private Card selectMinBigTarget(Card biggestCard,ArrayList<Card> Cards){
         if (Cards.size()==0)
             return null;
@@ -99,6 +100,6 @@ public class SmartStrategy implements IStrategy{
         for (int i=0;i<trick.getNumberOfCards();i++){
             allUsedCard.add(trick.get(i));
         }
-        System.out.println("在玩儿完几轮之后我知道的牌的数量："+allUsedCard.size());
+        System.out.println("The number of card that smart player knows: "+allUsedCard.size());
     }
 }

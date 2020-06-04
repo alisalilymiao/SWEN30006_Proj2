@@ -8,9 +8,9 @@ import java.util.Random;
 
 public class RandomUtil {
 
-    //随机生成的seed
+    //random seed
     //static final Random random = ThreadLocalRandom.current();
-    //使用固定seed生成的random
+    //random uses the fixed seed
     public static final Random random = new Random();
 
 

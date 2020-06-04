@@ -16,6 +16,7 @@ public class Player {
 
     public Player(String playerType){
         this.playerType = playerType;
+        this.score = 0;
     }
 
     public void setHand(Hand hand){
