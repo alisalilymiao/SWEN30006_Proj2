@@ -1,6 +1,6 @@
 package players;
 
-import game.QuantityAnomalyException;
+import exception.QuantityAnomalyException;
 import properties.Configure;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class PlayerFactory {
                 throw(new QuantityAnomalyException());
             } catch (QuantityAnomalyException e) {
                 e.printStackTrace();
-                System.out.println("The total number of people playing the game should be four");
+                System.out.println("The total number of people playing the exception should be four");
                 System.exit(0);
             }
         }
@@ -59,7 +59,7 @@ public class PlayerFactory {
                         throw(new QuantityAnomalyException());
                     } catch (QuantityAnomalyException e) {
                         e.printStackTrace();
-                        System.out.println("The total number of people playing the game should be four");
+                        System.out.println("The total number of people playing the exception should be four");
                         System.exit(0);
                     }
                 }
@@ -80,7 +80,7 @@ public class PlayerFactory {
                         throw(new QuantityAnomalyException());
                     } catch (QuantityAnomalyException e) {
                         e.printStackTrace();
-                        System.out.println("The total number of people playing the game should be four");
+                        System.out.println("The total number of people playing the exception should be four");
                         System.exit(0);
                     }
                 }
@@ -100,7 +100,7 @@ public class PlayerFactory {
                         throw(new QuantityAnomalyException());
                     } catch (QuantityAnomalyException e) {
                         e.printStackTrace();
-                        System.out.println("The total number of people playing the game should be four");
+                        System.out.println("The total number of people playing the exception should be four");
                         System.exit(0);
                     }
                 }

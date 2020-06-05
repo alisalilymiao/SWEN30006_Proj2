@@ -2,7 +2,7 @@ package strategy;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import game.Whist;
+import Whist;
 import utils.RandomUtil;
 
 import java.util.ArrayList;

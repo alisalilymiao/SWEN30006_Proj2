@@ -4,7 +4,7 @@ import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.CardAdapter;
 import ch.aplu.jcardgame.CardListener;
 import ch.aplu.jcardgame.Hand;
-import game.Whist;
+import Whist;
 
 import static ch.aplu.jgamegrid.GameGrid.delay;
 

@@ -2,7 +2,7 @@ package players;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import game.Whist;
+import Whist;
 import strategy.*;
 
 public class Player {

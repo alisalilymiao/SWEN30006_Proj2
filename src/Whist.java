@@ -1,9 +1,9 @@
-package game;
-
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.Actor;
 import ch.aplu.jgamegrid.Location;
 import ch.aplu.jgamegrid.TextActor;
+import exception.BrokeRuleException;
+import exception.QuantityAnomalyException;
 import players.Player;
 import players.PlayerFactory;
 import properties.Configure;
@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
-import java.util.Scanner;
 
 public class Whist extends CardGame {
     public enum Suit
@@ -43,7 +42,7 @@ public class Whist extends CardGame {
     public final int winningScore;
     //init all players
     private Player[] players;
-    //set the game type
+    //set the exception type
     private int gameType;
 
     private final int handWidth = 400;
@@ -91,7 +90,7 @@ public class Whist extends CardGame {
 
     private Card selected;
 
-    private void initPlayers() throws QuantityAnomalyException{
+    private void initPlayers() throws QuantityAnomalyException {
         PlayerFactory playerFactory = new PlayerFactory();
         players = playerFactory.initPlayer().toArray(new Player[0]);
     }
@@ -180,7 +179,7 @@ public class Whist extends CardGame {
                             throw(new BrokeRuleException(violation));
                         } catch (BrokeRuleException e) {
                             e.printStackTrace();
-                            System.out.println("A cheating player spoiled the game!");
+                            System.out.println("A cheating player spoiled the exception!");
                             System.exit(0);
                         }
                 }
@@ -231,8 +230,8 @@ public class Whist extends CardGame {
         setTitle("Whist (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
 
-        /*setStatusText("Users select one of the game pattern: 1.original 2.legal 3.smart");
-        System.out.println("Users select one of the game pattern: 1.original 2.legal 3.smart");
+        /*setStatusText("Users select one of the exception pattern: 1.original 2.legal 3.smart");
+        System.out.println("Users select one of the exception pattern: 1.original 2.legal 3.smart");
         Scanner scanner = new Scanner(System.in);
         gameType = scanner.nextInt();*/
 
