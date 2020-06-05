@@ -2,7 +2,7 @@ package strategy;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import Whist;
+import game.WhistGameEnum;
 import utils.RandomUtil;
 
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ public class SmartStrategy implements IStrategy{
     private HashSet<Card> allUsedCard = new HashSet<>();
 
     @Override
-    public Card selectCard(Hand hand, Hand trick, Whist.Suit trump) {
+    public Card selectCard(Hand hand, Hand trick, WhistGameEnum.Suit trump) {
         // TODO Auto-generated method stub
-        Whist.Suit leadSuit;
+        WhistGameEnum.Suit leadSuit;
         if(trick.getNumberOfCards()==0) {
             return RandomUtil.randomCard(hand);
         }else {
@@ -26,7 +26,7 @@ public class SmartStrategy implements IStrategy{
             }
             //System.out.println("The total number of Card I know"+allUsedCard.size());
 
-            leadSuit= (Whist.Suit) trick.get(0).getSuit();
+            leadSuit= (WhistGameEnum.Suit) trick.get(0).getSuit();
             //if players have cards of lead suit, they should play that.
             if(hand.getNumberOfCardsWithSuit(leadSuit)>0) {
                 ArrayList<Card> leadSuitList  = hand.getCardsWithSuit(leadSuit);

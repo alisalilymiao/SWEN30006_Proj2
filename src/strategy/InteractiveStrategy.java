@@ -4,7 +4,7 @@ import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.CardAdapter;
 import ch.aplu.jcardgame.CardListener;
 import ch.aplu.jcardgame.Hand;
-import Whist;
+import game.WhistGameEnum;
 
 import static ch.aplu.jgamegrid.GameGrid.delay;
 
@@ -24,7 +24,7 @@ public class InteractiveStrategy implements IStrategy{
     }
 
     @Override
-    public Card selectCard(Hand hand, Hand trick, Whist.Suit trump) {
+    public Card selectCard(Hand hand, Hand trick, WhistGameEnum.Suit trump) {
         selected = null;
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);

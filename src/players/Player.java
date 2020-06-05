@@ -2,7 +2,7 @@ package players;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import Whist;
+import game.WhistGameEnum;
 import strategy.*;
 
 public class Player {
@@ -45,7 +45,7 @@ public class Player {
         }
     }
 
-    public Card playerSelectCard(Hand trick, Whist.Suit trump){
+    public Card playerSelectCard(Hand trick, WhistGameEnum.Suit trump){
         return playStrategy.selectCard(hand,trick,trump);
     }
 

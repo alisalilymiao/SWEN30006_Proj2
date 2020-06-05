@@ -4,6 +4,7 @@ import ch.aplu.jgamegrid.Location;
 import ch.aplu.jgamegrid.TextActor;
 import exception.BrokeRuleException;
 import exception.QuantityAnomalyException;
+import game.WhistGameEnum;
 import players.Player;
 import players.PlayerFactory;
 import properties.Configure;
@@ -18,17 +19,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 public class Whist extends CardGame {
-    public enum Suit
-    {
-        SPADES, HEARTS, DIAMONDS, CLUBS
-    }
 
-    public enum Rank
-    {
-        // Reverse order of rank importance (see rankGreater() below)
-        // Order of cards is tied to card images
-        ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO
-    }
 
     final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
 
@@ -47,7 +38,7 @@ public class Whist extends CardGame {
 
     private final int handWidth = 400;
     private final int trickWidth = 40;
-    private final Deck deck = new Deck(Whist.Suit.values(), Whist.Rank.values(), "cover");
+    private final Deck deck = new Deck(WhistGameEnum.Suit.values(), WhistGameEnum.Rank.values(), "cover");
     private final Location[] handLocations = {
             new Location(350, 625),
             new Location(75, 350),
@@ -118,7 +109,7 @@ public class Whist extends CardGame {
 
     private Optional<Integer> playRound(){
         // Select and display trump suit
-        final Whist.Suit trumps = RandomUtil.randomEnum(Whist.Suit.class);
+        final WhistGameEnum.Suit trumps = RandomUtil.randomEnum(WhistGameEnum.Suit.class);
         final Actor trumpsActor = new Actor("sprites/"+trumpImage[trumps.ordinal()]);
         addActor(trumpsActor, trumpsActorLocation);
         // End trump suit
@@ -126,7 +117,7 @@ public class Whist extends CardGame {
         Hand trick;
         int winner;
         Card winningCard;
-        Whist.Suit lead;
+        WhistGameEnum.Suit lead;
         int nextPlayer = RandomUtil.random.nextInt(nbPlayers); // randomly select player to lead for this round
 
         for (int i = 0; i < nbStartCards; i++){
@@ -146,7 +137,7 @@ public class Whist extends CardGame {
             trick.draw();
             selected.setVerso(false);
             // No restrictions on the card being lead
-            lead = (Whist.Suit) selected.getSuit();
+            lead = (WhistGameEnum.Suit) selected.getSuit();
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             players[nextPlayer].updateHand(hands[nextPlayer]);
             winner = nextPlayer;
@@ -263,15 +254,15 @@ public class Whist extends CardGame {
 
 
     public Hand[] dealingOut(int nbPlayers, int nbCardsPerPlayer, Deck deck) {
-        int nbCard = Whist.Suit.values().length* Whist.Rank.values().length;
+        int nbCard = WhistGameEnum.Suit.values().length* WhistGameEnum.Rank.values().length;
         if (nbPlayers * nbCardsPerPlayer > nbCard) {
             fail("Error in Deck.dealing out.\n" + nbCard + " cards in deck. Not enough for" + "\n" + nbPlayers + ((nbPlayers > 1) ? " players with " : "player with ") + nbCardsPerPlayer + ((nbCardsPerPlayer > 1) ? " cards per player." : "card per player.") + "\nApplication will terminate.");
         }
 
 
         ArrayList<Card> cards = new ArrayList<Card>();
-        for (Whist.Suit suit : Whist.Suit.values()) {
-            for (Whist.Rank rank : Whist.Rank.values()) {
+        for (WhistGameEnum.Suit suit : WhistGameEnum.Suit.values()) {
+            for (WhistGameEnum.Rank rank : WhistGameEnum.Rank.values()) {
                 Card card = new Card(deck, suit, rank);
                 cards.add(card);
             }

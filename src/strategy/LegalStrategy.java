@@ -2,20 +2,20 @@ package strategy;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import Whist;
+import game.WhistGameEnum;
 import utils.RandomUtil;
 
 public class LegalStrategy implements IStrategy{
 
-    private Whist.Suit leadSuit;  //Define the current lead suit
+    private WhistGameEnum.Suit leadSuit;  //Define the current lead suit
 
     @Override
-    public Card selectCard(Hand hand, Hand trick, Whist.Suit trump) {
+    public Card selectCard(Hand hand, Hand trick, WhistGameEnum.Suit trump) {
 
         Card selected;
 
         if (trick.getNumberOfCards() != 0) {
-            leadSuit = (Whist.Suit) trick.get(0).getSuit();
+            leadSuit = (WhistGameEnum.Suit) trick.get(0).getSuit();
             if (hand.getCardsWithSuit(leadSuit).size() > 0) {
                 selected = RandomUtil.randomCard(hand.getCardsWithSuit(leadSuit));
             } else {
