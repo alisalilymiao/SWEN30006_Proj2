@@ -50,6 +50,9 @@ public class PlayerFactory {
             players.add(new Player("legal"));
             legalPlayerNum--;
         }
+        /*for (Player player:players){
+            player.setPlayStrategy();
+        }*/
         /*switch (pattern){
             case 1:
                 interactivePlayerNum = Integer.parseInt(Configure.getInstance().values("interactivePlayerNum"));
