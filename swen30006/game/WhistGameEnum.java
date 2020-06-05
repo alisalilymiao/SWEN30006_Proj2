@@ -1,6 +1,7 @@
 package game;
 
 public class WhistGameEnum {
+
     public enum Suit
     {
         SPADES, HEARTS, DIAMONDS, CLUBS

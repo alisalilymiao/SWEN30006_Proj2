@@ -1,5 +1,6 @@
 package properties;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -21,8 +22,9 @@ public class Configure {
         if (gameProperties == null){
             gameProperties = new Properties();
         }
-        InputStream fps = null;
-        fps = Configure.class.getClassLoader().getResourceAsStream("whist.properties");
+        FileReader fps = new FileReader("whist.properties");
+
+       //fps = Configure.class.getClassLoader().getResourceAsStream("whist.properties");
         gameProperties.load(fps);
 
     }
