@@ -37,7 +37,7 @@ public class SmartStrategy implements IStrategy{
                     //choose a minimum biggest card
                     Card currentBiggestCard = trick.getCardsWithSuit(leadSuit).get(0);
                     //System.out.println(leadSuitList.size());
-                    //select a card from  an arrraylist that is the minimum of the cards
+                    //select a card from  an arraylist that is the minimum of the cards
                     // bigger than the currentBiggestCard
                     Card target = selectMinBigTarget(currentBiggestCard, leadSuitList);
 
@@ -80,7 +80,7 @@ public class SmartStrategy implements IStrategy{
         }
     }
 
-    //choose a card from  an arrraylist that is the minimum of the cards bigger than biggest card of the biggest card
+    //choose a card from  an arraylist that is the minimum of the cards bigger than biggest card of the biggest card
     private Card selectMinBigTarget(Card biggestCard,ArrayList<Card> Cards){
         if (Cards.size()==0)
             return null;
